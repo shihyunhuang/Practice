@@ -17,7 +17,8 @@ def scrape_website(url):
             print(f"There are {len(n)} articles on this page")
 
         else:
-            print(f"Headline: {headline.get_text(strip=True)}")
+            catagory = soup.find('meta', attrs={'name': 'categormeta-section'})
+            print(f"{catagory.get('content')}, Headline: {headline.get_text(strip=True)}")
             post_time = soup.find('meta', attrs={'property': 'article:published_time'})
             update_time = soup.find('meta', attrs={'property': 'article:modified_time'})
             if post_time:

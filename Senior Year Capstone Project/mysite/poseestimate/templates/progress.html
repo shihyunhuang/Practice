@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="{% static 'style.css' %}">
+      <title>影片、速度、音量</title>
+    </head>
+<body>
+
+      <div class="player">
+        <video class="player__video viewer" src="{{MEDIA_URL}}/Hennessy.mp4"></video>
+        <div class ="blank"></div>
+        <!--自訂的控制器介面-->
+        <div class="player__controls">
+          <div class="progress-container">
+            <div id="startPointer" class="progress-pointer" style="left: 0%;">Start</div>
+            <div id="endPointer" class="progress-pointer" style="left: 100%;">End</div>
+            <div id="myBar" class="progress-bar"></div>
+            <div id = "label0" class="progress-label" style="left: 0%;">0</div>
+            <div id = "label1" class="progress-label" style="left: 12.5%;">1</div>
+            <div id = "label2" class="progress-label" style="left: 25%;">2</div>
+            <div id = "label3" class="progress-label" style="left: 37.5%;">3</div>
+            <div id = "label4" class="progress-label" style="left: 50%;">4</div>
+            <div id = "label5" class="progress-label" style="left: 62.5%;">5</div>
+            <div id = "label6" class="progress-label" style="left: 75%;">6</div>
+            <div id = "label7" class="progress-label" style="left: 87.5%;">7</div>
+            <div id = "label8" class="progress-label" style="left: 100%;">8</div>
+          </div>
+          <br>
+          <div style="text-align: center">
+            <!--播放鈕-->
+            <button class="player__button toggle" title="Toggle Play">►</button>
+            <!--音量-->
+            <input type="range" name="volume" class="player__slider" min="0" max="1" step="0.1" value="1">
+            <span id="volumeDisplay">音量: 1.0</span>
+            <!--播放速度-->
+            <input type="range" name="playbackRate" class="player__slider" min="0.25" max="2" step="0.25" value="1">
+            <span id="speedDisplay">播放速度: 1.0</span>
+          </div>
+        </div>
+       </div>
+
+
+  <script src="{% static 'videocontrol.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+html,
+body {
+  height: 100vh;
+  font-family: open sans, sans-serif;
+  font-size: 15px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #d9d9d9;
+}
+.nav {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid #838383;
+}
+a:visited,
+a:hover,
+a:link {
+  text-decoration: none !important;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px;
+}
+.logo span {
+  color: #850000;
+  font-weight: 600;
+  font-size: 30px;
+  margin-left: 8px;
+}
+
+.player {
+  display: flex;
+  flex-direction: row; /* 将视频和控制器水平排列 */
+  justify-content: center; /* 在水平方向上居中对齐 */
+  align-items: flex-start; /* 在垂直方向上顶部对齐 */
+  flex-wrap: wrap; /* 如果空间不足，自动换行到下一行 */
+}
+
+.video-wrapper {
+  flex: 1; /* 让视频占据可用的宽度 */
+  margin: 0 10px; /* 设置视频之间的间距 */
+  text-align: center;
+}
+
+video,
+canvas {
+  /*width: 100%; /* 讓video和canvas寬度都填滿其父容器 */
+  /*height: auto; 自動計算高度以保持原始比例 */
+  max-width: 100%; /* 當屏幕寬度較小時，保持寬度為100% */
+  max-height: 100%; /* 保持高度為100% */
+  margin: auto
+}
+
+.player__controls {
+  width: 100%; /* 控制器占据整个宽度 */
+  text-align: center; /* 文字居中 */
+  margin-top: 10px; /* 控制器与视频之间的垂直间距 */
+}
+
+.progress-container {
+  text-align: center; /* 水平居中 */
+  position: relative;
+  width: 95%;
+  height: 20px;
+  background-color: #989898;
+  margin: 0 auto; /* 水平居中 */
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #353535;
+  position: relative;
+}
+
+.progress-label {
+  position: absolute;
+  top: 0;
+  background-color: #850000;
+  color: #850000;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 3px;
+  line-height: 20px;
+  width: 5px; /* You can adjust the width according to your design */
+  transform: translateX(-50%);
+}
+
+.progress-pointer {
+  position: absolute;
+  top: -20px; /* Adjust this value based on your design */
+  display: inline-block;
+  width: 30px;
+  height: 20px;
+  background-color: #850000; /* or any color you prefer */
+  color: #d9d9d9;
+  text-align: center;
+  font-size: 10px;
+  line-height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.player__button.toggle {
+  width: 40px; /* 設置按鈕寬度 */
+  height: 40px; /* 設置按鈕高度 */
+}
+
+.countdown {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  color: #850000;
+}
+
+#with_bone {
+  visibility: hidden;
+  display: none;
+}
+
+#download-link{
+  color: #850000;
+}
+
+button{
+  border-radius: 10px;
+  height: 40px;
+  border: none;
+  background: #850000;
+  color: #fdfdfd;
+  font-size: 14px;
+  padding: 0 25px;
+  text-align: center;
+}
+
+button:hover {
+  transform: translateY(-6px);
+  box-shadow: 2px 2px 6px 2px #000000;
+}
+button:active {
+  transform: translateY(-6px) scale(0.98);
+}

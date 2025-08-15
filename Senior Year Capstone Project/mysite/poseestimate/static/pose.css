@@ -1,0 +1,21 @@
+.input_video5 {
+    transform: scaleX(-1);
+  }
+  .output5 {
+    visibility: hidden;
+    display: none;
+  }
+  .center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 使容器充滿整個視窗高度 */
+  }
+  
+  .control5 {
+    display: none;
+  }
+  
+  .loading {
+    display: none;
+  }

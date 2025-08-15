@@ -1,0 +1,86 @@
+<!--<!DOCTYPE html>
+<html>
+<body>
+    <h1>歡迎光臨</h1>
+    <br>
+    <a href="http://127.0.0.1:8000/poseestimate/upload">從電腦上傳影片</a><br>
+    <a href="http://127.0.0.1:8000/poseestimate/youtube">輸入網址下載影片</a><br>
+</body>
+</html>
+-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link rel="stylesheet" href="{% static 'homestyle.css' %}" />
+    <link rel="icon" href="{% static 'icon _users_.svg' %}" type="image/x-icon">
+    <title>首頁</title>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a class="logo" href="homepage.html">
+          <img src="{% static 'icon _users_.svg' %}" alt="" />
+          <span>DanceAW</span>
+        </a>
+      </div>
+    </header>
+    <div class="container">
+      <div class="videoSearch">
+        <h1 class="title">舞蹈連結：</h1>
+        <form id="search-form" method="post" action="">
+          {% csrf_token %}
+          <input
+            type="text"
+            name="link"
+            id="link"
+            class="search_input"
+            placeholder="Paste youtube link here"
+          />
+          <input type="hidden" name="form_name" value="url_input" />
+          <input class="btn" type="submit" />
+        </form>
+      </div>
+
+      <div class="videoUpload">
+        <h1 class="title">上傳影片：</h1>
+        <form
+          id="upload-form"
+          action=""
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div>
+            <input
+              id="file"
+              type="file"
+              name="file"
+              onchange="upload(this)"
+              style="display: none"
+              required
+            />
+            <input type="hidden" name="form_name" value="file_upload" />
+            <button class="btn" onclick="file.click()">選擇檔案</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <footer>
+      <div class="copyright">
+        <p>網站說明...</p>
+      </div>
+    </footer>
+    <script>
+      function upload(input) {
+        // 當選擇檔案後，觸發表單的提交事件
+        document.getElementById("upload-form").submit();
+      }
+    </script>
+  </body>
+</html>

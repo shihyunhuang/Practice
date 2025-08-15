@@ -1,0 +1,70 @@
+html,
+body {
+  height: 100%;
+  font-family: open sans, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #d9d9d9;
+}
+.nav {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid #838383;
+}
+
+a:visited,
+a:hover,
+a:link {
+  text-decoration: none !important;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.logo span {
+  color: #850000;
+  font-weight: 600;
+  font-size: 36px;
+  margin-left: 10px;
+}
+
+.container {
+  padding: 80px 20px 100px;
+  text-align: center;
+}
+
+.controls {
+  margin-top: 20px;
+}
+.label {
+  font-size: 36px;
+}
+.btn {
+  border-radius: 10px;
+  height: 40px;
+  border: none;
+  background: #850000;
+  color: #fdfdfd;
+  font-size: 14px;
+  padding: 0 25px;
+}
+.btn:hover {
+  transform: translateY(-6px);
+  box-shadow: 2px 2px 6px 2px #000000;
+}
+.btn:active {
+  transform: translateY(-6px) scale(0.98);
+}
+video {
+  width: 100%;
+  max-width: 600px;
+}

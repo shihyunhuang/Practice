@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="{% static 'style.css' %}">
+      <script src="https://unpkg.com/howler@2.2.3/dist/howler.js"></script>
+      <script>
+        var bpmPercentData = {{ bpm_percent|safe }};
+        var countdowntime = {{ countdowntime }};
+        var countdownSound = new Howl({
+          src: ['{% static "clap.mp3" %}'],
+          preload: true, // Set preload to true for automatic preloading
+          volume: 1.0,
+        });
+      </script>
+      <title>DanceAW</title>
+      <link rel="icon" href="{% static 'icon _users_.svg' %}" type="image/x-icon">
+
+      <!-- pose -->
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+        />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.css"
+        crossorigin="anonymous"
+        />
+      <link rel="stylesheet" href="{% static 'pose.css' %}" />
+      <script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/@mediapipe/pose@0.2/pose.js"
+        crossorigin="anonymous"
+      ></script>
+    </head>
+    <body>
+      <header>
+        <div class="nav">
+          <a class="logo" href="http://127.0.0.1:8000/poseestimate/home">
+            <img src="{% static 'icon _users_.svg' %}" alt="" width="45" />
+            <span>DanceAW</span>
+          </a>
+        </div>
+      </header>
+      <br>
+      <div class="player">
+        <div class="video-wrapper" id="poseVideoWrapper">
+          <video class="input_video5"></video>
+          <!-- MEDIAPIPE OUTPUT -->
+          <canvas class="output5"></canvas>
+        </div>
+        <div class="video-wrapper" id="VideoWrapper">
+          <video id="without_bone" class="player__video viewer" src="{{ MEDIA_URL }}{{ filename|urlencode }}/output_without_pose.mp4"></video>
+          <video id="with_bone" class="player__video viewer" src="{{ MEDIA_URL }}{{ filename|urlencode }}/output.mp4"></video>
+        </div>
+        <!--自訂的控制器介面-->
+        <div class="player__controls">
+          <div class="progress-container">
+            <div id="startPointer" class="progress-pointer" style="left: 0%;">Start</div>
+            <div id="endPointer" class="progress-pointer" style="left: 100%;">End</div>
+            <div id="myBar" class="progress-bar"></div>
+            {% for label in bpm_percent %}
+            <div id="label{{ label.id }}" class="progress-label" style="left: {{ label.left }}%;">{{ label.content }}</div>
+            {% endfor %}
+          </div>
+          <br>
+          <div style="text-align: center">
+            <!--播放鈕-->
+            <button class="player__button toggle" title="Toggle Play">►</button>
+            <!--音量-->
+            <input type="range" name="volume" class="volume__slider" min="0" max="1" step="0.1" value="1">
+            <span id="volumeDisplay">音量: 1.0</span>
+            <!--播放速度-->
+            <input type="range" name="playbackRate" class="speed__slider" min="0.25" max="2" step="0.25" value="1">
+            <span id="speedDisplay">播放速度: 1.0</span>
+            <div id="countdown" class="countdown"></div>
+            <button class="countdown_turn" id="countdown_turn">開啟倒數</button>
+            <button class="display_bone" id="display_bone">顯示骨架</button>
+            <video id="recorded-video" controls style="display: none;"></video>
+            <button id="start-record">開始錄製</button>
+            <button id="stop-record" disabled>停止錄製</button>
+            <a id="download-link" style="display: none;">下載錄製的視頻</a>
+          </div>
+        </div>
+        <div class="loading">
+          <div class="spinner"></div>
+        </div>
+        <div style="visibility: hidden;" class="control5">
+        </div>
+       </div>
+
+    <script src="{% static 'videocontrol.js' %}"></script>
+    <script src="{% static 'pose.js' %}"></script>
+    <script>
+      window.onload = function () {
+        var videoBHeight = document.getElementById("VideoWrapper").clientHeight;
+        document.getElementById("poseVideoWrapper").style.height = videoBHeight + 'px';
+      };
+    </script>
+</body>
+</html>

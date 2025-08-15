@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DanceAW</title>
+    <link rel="stylesheet" href="{% static 'cutstyle.css' %}" />
+    <link rel="icon" href="{% static 'icon _users_.svg' %}" type="image/x-icon">
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a class="logo" href="homepage.html">
+          <img src="{% static 'icon _users_.svg' %}" alt="" />
+          <span>DanceAW</span>
+        </a>
+      </div>
+    </header>
+    <div class="container">
+      <video id="videoPlayer" controls>
+        <source
+          src="{{ MEDIA_URL }}{{ filename|urlencode }}/{{ videoname|urlencode }}"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+      <div class="controls">
+        <label for="startTime"
+          >開始時間：
+          <a id="startTimestamp" name="" class="timestamp">0.0 秒</a></label
+        >
+        <input
+          type="range"
+          id="startTime"
+          name="startTime"
+          step="0.1"
+          min="0"
+        />
+        <button class="btn" id="confirmStartButton">確認開始時間</button>
+      </div>
+      <div class="controls">
+        <label for="endTime"
+          >結束時間：<a id="endTimestamp" class="timestamp">0.0 秒</a></label
+        >
+        <input type="range" id="endTime" name="endTime" step="0.1" min="0" />
+        <button class="btn" id="confirmEndButton">確認結束時間</button>
+      </div>
+      <div class="controls">
+        <button class="btn" id="clipButton">剪輯影片</button>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" id="startsec" name="startsec" />
+          <input type="hidden" id="endsec" name="endsec" />
+          <input class="btn" type="submit" name="cut" value="開始裁切" />
+        </form>
+      </div>
+      <!-- <form action="" method="post">
+        {% csrf_token %} 開始時間：分<input
+          type="text"
+          id="startmin"
+          name="startmin"
+        />
+        秒<input type="text" id="startTime" name="startTime" /><br />
+        <input type="submit" value="開始裁切" />
+      </form> -->
+    </div>
+    <!-- <video width="640" height="360" controls> 
+      <source
+        src="{{ MEDIA_URL }}{{ filename|urlencode }}/{{ videoname|urlencode }}"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>-->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const video = document.getElementById("videoPlayer");
+        const startTimeInput = document.getElementById("startTime");
+        const endTimeInput = document.getElementById("endTime");
+        const startTimestampDisplay = document.getElementById("startTimestamp");
+        const endTimestampDisplay = document.getElementById("endTimestamp");
+        const clipButton = document.getElementById("clipButton");
+        const confirmStartButton = document.getElementById("confirmStartButton");
+        const confirmEndButton = document.getElementById("confirmEndButton");
+
+        video.addEventListener("loadedmetadata", function () {
+          startTimeInput.max = video.duration;
+          endTimeInput.max = video.duration;
+        });
+
+        startTimeInput.addEventListener("input", function () {
+          updateTimestampDisplay(startTimeInput, startTimestampDisplay);
+          video.currentTime = parseFloat(startTimeInput.value);
+        });
+
+        endTimeInput.addEventListener("input", function () {
+          updateTimestampDisplay(endTimeInput, endTimestampDisplay);
+          video.currentTime = parseFloat(endTimeInput.value);
+        });
+
+        confirmStartButton.addEventListener("click", function () {
+          startTimeInput.value = video.currentTime;
+          updateTimestampDisplay(startTimeInput, startTimestampDisplay);
+
+          document.getElementById("startsec").value = parseFloat(
+            startTimeInput.value
+          );
+          console.log(startsec);
+        });
+
+        confirmEndButton.addEventListener("click", function () {
+          endTimeInput.value = video.currentTime;
+          updateTimestampDisplay(endTimeInput, endTimestampDisplay);
+
+          document.getElementById("endsec").value = parseFloat(
+            endTimeInput.value
+          );
+          console.log(endsec);
+        });
+
+        clipButton.addEventListener("click", function () {
+          let startTime = parseFloat(startTimeInput.value);
+          let endTime = parseFloat(endTimeInput.value);
+
+          if (startTime >= 0 && endTime > startTime) {
+            video.currentTime = startTime;
+            video.play();
+
+            video.addEventListener("timeupdate", function checkTime() {
+              if (video.currentTime >= endTime) {
+                video.pause();
+                video.currentTime = startTime;
+                video.play();
+              }
+            });
+          }
+        });
+      });
+
+      function updateTimestampDisplay(input, displayElement) {
+        const timestamp = parseFloat(input.value).toFixed(1);
+        displayElement.textContent = `${timestamp} 秒`;
+      }
+    </script>
+  </body>
+</html>

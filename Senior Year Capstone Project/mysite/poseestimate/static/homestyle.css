@@ -1,0 +1,82 @@
+html,
+body {
+  height: 100%;
+  font-family: open sans, sans-serif;
+  font-size: 15px;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #d9d9d9;
+}
+.nav {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid #838383;
+}
+a:visited,
+a:hover,
+a:link {
+  text-decoration: none !important;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+.logo span {
+  color: #850000;
+  font-weight: 600;
+  font-size: 36px;
+  margin-left: 10px;
+}
+.container {
+  padding: 100px 20px 100px;
+  text-align: center;
+}
+h1 {
+  font-size: 36px;
+}
+.search_input {
+  border-radius: 10px;
+  border: 1px solid #850000;
+  width: 500px;
+  height: 55px;
+  outline: #850000;
+  font-size: 18px;
+  margin: 10px;
+}
+.btn {
+  border-radius: 10px;
+  height: 55px;
+  border: none;
+  background: #850000;
+  color: #fdfdfd;
+  font-size: 18px;
+  padding: 0 40px;
+}
+.btn:hover {
+  transform: translateY(-6px);
+  box-shadow: 2px 2px 6px 2px #000000;
+}
+.btn:active {
+  transform: translateY(-6px) scale(0.98);
+}
+.videoUpload {
+  padding-top: 80px;
+  padding-bottom: 60px;
+}
+footer {
+  display: block;
+}
+.copyright {
+  border-top: 1px solid #838383;
+  font-weight: 600;
+  font-size: 24px;
+  color: #000;
+  padding: 30px 0;
+  text-align: center;
+  margin-top: 20px;
+}
